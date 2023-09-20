@@ -1,9 +1,18 @@
 package com.hendisantika.controller;
 
+import com.hendisantika.entity.User;
 import com.hendisantika.repository.UserResource;
 import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateException;
+import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,4 +36,12 @@ public class UserEndpoint {
 
     @Inject
     UserResource userResource;
+
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance getAllUserView()
+            throws TemplateException {
+        List<User> users = userResource.getUsers();
+        return home.data(Map.of("users", users));
+    }
 }
