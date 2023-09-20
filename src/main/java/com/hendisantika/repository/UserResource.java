@@ -1,4 +1,4 @@
-package com.hendisantika.controller;
+package com.hendisantika.repository;
 
 import com.hendisantika.entity.User;
 import jakarta.inject.Inject;
