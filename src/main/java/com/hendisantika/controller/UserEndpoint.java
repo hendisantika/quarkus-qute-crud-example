@@ -104,4 +104,14 @@ public class UserEndpoint {
         userResource.updateUser(usr);
         return getAllUserView();
     }
+
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/delete/{id}")
+    public TemplateInstance deleteUser(@PathParam("id")
+                                       Long id)
+            throws TemplateException, IOException {
+        userResource.deleteUser(id);
+        return getAllUserView();
+    }
 }
