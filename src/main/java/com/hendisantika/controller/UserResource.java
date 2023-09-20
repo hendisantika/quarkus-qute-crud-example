@@ -39,4 +39,9 @@ public class UserResource {
         return user;
     }
 
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void updateUser(User user) {
+        entityManager.merge(user);
+    }
+
 }
