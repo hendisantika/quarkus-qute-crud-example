@@ -6,9 +6,7 @@ import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateException;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
 import java.io.IOException;
@@ -57,5 +55,22 @@ public class UserEndpoint {
         obj.put("user", user);
         obj.put("isUpdate", false);
         return createupdate.data(obj);
+    }
+
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("/create")
+    public TemplateInstance createUser
+            (@FormParam("firstName") String firstName,
+             @FormParam("lastName") String lastName,
+             @FormParam("email") String email)
+            throws TemplateException {
+        User usr = new User();
+        usr.setEmail(email);
+        usr.setFirstName(firstName);
+        usr.setLastName(lastName);
+        userResource.addUser(usr);
+        return getAllUserView();
     }
 }
