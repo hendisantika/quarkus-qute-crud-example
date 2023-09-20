@@ -1,8 +1,11 @@
 package com.hendisantika.controller;
 
+import com.hendisantika.entity.User;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.persistence.EntityManager;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,4 +23,9 @@ public class UserResource {
 
     @Inject
     EntityManager entityManager;
+
+    public List<User> getUsers() {
+        return entityManager.createQuery("SELECT c FROM User c").getResultList();
+    }
+
 }
