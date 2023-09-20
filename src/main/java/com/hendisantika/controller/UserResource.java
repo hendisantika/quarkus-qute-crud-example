@@ -4,6 +4,7 @@ import com.hendisantika.entity.User;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,12 @@ public class UserResource {
 
     public User getUser(Long id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public User addUser(User user) {
+        entityManager.persist(user);
+        return user;
     }
 
 }
