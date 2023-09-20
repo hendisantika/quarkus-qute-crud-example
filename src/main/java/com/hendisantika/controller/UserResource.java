@@ -28,4 +28,8 @@ public class UserResource {
         return entityManager.createQuery("SELECT c FROM User c").getResultList();
     }
 
+    public User getUser(Long id) {
+        return entityManager.find(User.class, id);
+    }
+
 }
