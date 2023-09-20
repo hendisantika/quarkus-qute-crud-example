@@ -73,4 +73,17 @@ public class UserEndpoint {
         userResource.addUser(usr);
         return getAllUserView();
     }
+
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/update/{id}")
+    public TemplateInstance updateUser
+            (@PathParam("id") Long id)
+            throws TemplateException {
+        User user = userResource.getUser(id);
+        Map<String, Object> obj = new HashMap<>();
+        obj.put("user", user);
+        obj.put("isUpdate", true);
+        return createupdate.data(obj);
+    }
 }
