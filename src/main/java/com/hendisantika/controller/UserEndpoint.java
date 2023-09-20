@@ -11,6 +11,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,5 +45,17 @@ public class UserEndpoint {
             throws TemplateException {
         List<User> users = userResource.getUsers();
         return home.data(Map.of("users", users));
+    }
+
+    @GET
+    @Path("/create")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance createUserView()
+            throws TemplateException, IOException {
+        User user = new User();
+        Map<String, Object> obj = new HashMap<>();
+        obj.put("user", user);
+        obj.put("isUpdate", false);
+        return createupdate.data(obj);
     }
 }
