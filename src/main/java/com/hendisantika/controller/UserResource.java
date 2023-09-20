@@ -44,4 +44,10 @@ public class UserResource {
         entityManager.merge(user);
     }
 
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void deleteUser(Long id) {
+        User user = getUser(id);
+        entityManager.remove(user);
+    }
+
 }
