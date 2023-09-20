@@ -86,4 +86,22 @@ public class UserEndpoint {
         obj.put("isUpdate", true);
         return createupdate.data(obj);
     }
+
+    @POST
+    @Path("/update/{id}")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance createUser
+            (@FormParam("firstName") String firstName,
+             @FormParam("lastName") String lastName,
+             @FormParam("email") String email,
+             @PathParam("id") Long id)
+            throws TemplateException {
+        User usr = new User();
+        usr.setEmail(email);
+        usr.setFirstName(firstName);
+        usr.setLastName(lastName);
+        usr.setId(id);
+        userResource.updateUser(usr);
+        return getAllUserView();
+    }
 }
